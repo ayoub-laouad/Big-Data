@@ -1,0 +1,1322 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Big Data</title>
+  <link rel="stylesheet" href="https://stackedit.io/style.css" />
+</head>
+
+<body class="stackedit">
+  <div class="stackedit__html"><h2 id="table-des-matières">Table des matières</h2>
+<ol>
+<li><a href="#introduction">Introduction au Big Data</a></li>
+<li><a href="#les-4v">Les 4V du Big Data</a></li>
+<li><a href="#hadoop">Hadoop et BigInsights</a></li>
+<li><a href="#hdfs">HDFS - Système de Fichiers Distribué</a></li>
+<li><a href="#mapreduce">MapReduce - Framework de Traitement</a></li>
+<li><a href="#langages">Langages de Requête Hadoop</a></li>
+<li><a href="#hbase">HBase - Base de Données NoSQL</a></li>
+<li><a href="#examen">Points Clés pour l’Examen</a></li>
+</ol>
+<hr>
+<h2 id="a-idintroductiona1.-introduction-au-big-data"><a id="introduction"></a>1. Introduction au Big Data</h2>
+<h3 id="quest-ce-que-le-big-data">Qu’est-ce que le Big Data?</h3>
+<p>Le Big Data représente les <strong>énormes volumes de données structurées et non structurées</strong> qui s’accumulent chaque jour dans les organisations. Ces données proviennent de multiples sources : réseaux sociaux, capteurs IoT, appareils mobiles, transactions, etc.</p>
+<h3 id="statistiques-clés-du-cours">Statistiques Clés (du cours)</h3>
+<ul>
+<li><strong>1 sur 2</strong> leaders commerciaux n’ont pas accès aux données dont ils ont besoin</li>
+<li><strong>80%</strong> des données mondiales sont <strong>non structurées</strong></li>
+<li><strong>90%</strong> des données mondiales ont été créées au cours des 2 dernières années</li>
+<li><strong>20%</strong> seulement des données disponibles peuvent être traitées par les systèmes traditionnels</li>
+<li><strong>83%</strong> des CIO citent l’IA et l’analytique comme priorité stratégique</li>
+</ul>
+<h3 id="croissance-exponentielle-des-données">Croissance Exponentielle des Données</h3>
+<p>La croissance des données est liée à plusieurs facteurs :</p>
+<ul>
+<li><strong>2+ milliards</strong> de personnes sur Internet</li>
+<li><strong>30 milliards</strong> de tags RFID</li>
+<li><strong>4,6 milliards</strong> de téléphones avec caméra</li>
+<li><strong>55 millions</strong> de tweets par jour</li>
+<li><strong>1,2 trillion</strong> de recherches</li>
+</ul>
+<hr>
+<h2 id="a-idles-4va2.-les-4v-du-big-data-caractéristiques"><a id="les-4v"></a>2. Les 4V du Big Data (Caractéristiques)</h2>
+<h3 id="volume">Volume</h3>
+<p><strong>Traitement rentable des énormes volumes de données</strong></p>
+<ul>
+<li>Les données croissent à un rythme exponentiel</li>
+<li>De 2010 à 2020 : croissance de <strong>50x</strong></li>
+<li>Passage de 2010 à 2020 : 2 zettabytes à 35 zettabytes de données</li>
+<li>Les systèmes traditionnels ne peuvent traiter que 20% des données disponibles</li>
+</ul>
+<h3 id="vélocité">Vélocité</h3>
+<p><strong>Réponse aux vitesses croissantes d’arrivée des données</strong></p>
+<ul>
+<li>Les données arrivent en temps quasi-réel</li>
+<li>Nécessité d’une traitement rapide et continu</li>
+<li>Sources : streaming de capteurs, réseaux sociaux, transactions en ligne</li>
+</ul>
+<h3 id="variété">Variété</h3>
+<p><strong>Traitement collectif de la grande diversité des données</strong></p>
+<ul>
+<li>Données structurées (bases de données relationnelles)</li>
+<li>Données non structurées (texte, images, vidéos, sons)</li>
+<li>Données semi-structurées (JSON, XML)</li>
+<li>80% des données mondiales sont non structurées</li>
+</ul>
+<h3 id="véracité">Véracité</h3>
+<p><strong>Établissement de l’authenticité des sources de données</strong></p>
+<ul>
+<li>1 sur 3 leaders commerciaux ne font pas confiance aux informations utilisées pour prendre des décisions</li>
+<li>Nécessité d’assurer la qualité et la fiabilité des données</li>
+<li>Validation et nettoyage des données avant utilisation</li>
+</ul>
+<hr>
+<h2 id="a-idhadoopa3.-hadoop-et-biginsights"><a id="hadoop"></a>3. Hadoop et BigInsights</h2>
+<h3 id="quest-ce-que-hadoop">Qu’est-ce que Hadoop?</h3>
+<p><strong>Apache Hadoop</strong> est un <strong>framework open-source</strong> qui permet le traitement fiable, scalable et distribué de <strong>grandes quantités de données</strong>. Il camoufle les complexités sous-jacentes du système.</p>
+<h4 id="caractéristiques-principales">Caractéristiques Principales</h4>
+<ul>
+<li>Écrit en Java</li>
+<li>Composé de 3 sous-projets : MapReduce, HDFS, Hadoop Common</li>
+<li>Conçu pour du matériel informatique ordinaire (commodity hardware)</li>
+<li>Optimisé pour le traitement par lots (batch processing)</li>
+<li>Principe clé : <strong>Amener le traitement aux données, pas l’inverse</strong></li>
+</ul>
+<h4 id="logique-de-conception">Logique de Conception</h4>
+<ol>
+<li><strong>Stockage distribué</strong> dans tout le cluster</li>
+<li><strong>Tolérance aux pannes</strong> par réplication</li>
+<li><strong>Parallélisation automatique</strong> du traitement</li>
+<li><strong>Matériel peu coûteux</strong> (2-4K par nœud)</li>
+<li><strong>Processeurs processant les données localement</strong> où elles sont stockées (localité des données)</li>
+</ol>
+<h3 id="avantages-économiques">Avantages Économiques</h3>
+<ul>
+<li>1 pétaoctets cluster Hadoop ≈ <strong>1 million $</strong></li>
+<li>Matériel de base peut être utilisé</li>
+<li>Scalabilité horizontale facile (ajouter des nœuds)</li>
+</ul>
+<h3 id="quand-ne-pas-utiliser-hadoop">Quand NE PAS utiliser Hadoop?</h3>
+<ul>
+<li>❌ Traitement de transactions (accès aléatoire)</li>
+<li>❌ Travaux non parallélisables</li>
+<li>❌ Besoin d’accès aux données à faible latence</li>
+<li>❌ Traitement de nombreux petits fichiers</li>
+<li>❌ Calculs intensifs sur peu de données</li>
+</ul>
+<h3 id="ibm-biginsights">IBM BigInsights</h3>
+<p><strong>InfoSphere BigInsights</strong> est l’implémentation Hadoop d’IBM qui ajoute :</p>
+<ul>
+<li>Installation intégrée et facilitée</li>
+<li>Console d’administration web</li>
+<li>Outils de visualisation (BigSheets)</li>
+<li>Analytics avancées (Text Analytics, BigSQL, BigR)</li>
+<li>Accélérateurs pour cas d’usage spécifiques</li>
+<li>Intégration entreprise (sécurité, surveillance, alertes)</li>
+<li>Support technique professionnel</li>
+</ul>
+<h4 id="éditions-de-biginsights">Éditions de BigInsights</h4>
+<ol>
+<li><strong>Quick Start</strong> : Gratuit, non-production</li>
+<li><strong>Standard Edition</strong> : Fonctionnalités larges</li>
+<li><strong>Enterprise Edition</strong> : Capacités complètes, accélérateurs, support</li>
+</ol>
+<hr>
+<h2 id="a-idhdfsa4.-hdfs---système-de-fichiers-distribué-hadoop"><a id="hdfs"></a>4. HDFS - Système de Fichiers Distribué Hadoop</h2>
+<h3 id="architecture-hdfs">Architecture HDFS</h3>
+<p><strong>HDFS = Hadoop Distributed File System</strong></p>
+<p>C’est un système de fichiers distribué, fiable, à haut débit, conçu pour stocker les <strong>très gros fichiers</strong> sur plusieurs machines.</p>
+<h4 id="architecture-maître-esclave">Architecture Maître-Esclave</h4>
+<pre><code>          NameNode (Maître)
+           /    |    \
+       DN1     DN2    DN3  (DataNodes - Esclaves)
+</code></pre>
+<h3 id="composants-clés">Composants Clés</h3>
+<h4 id="namenode-maître">NameNode (Maître)</h4>
+<ul>
+<li><strong>Gère</strong> le système de fichiers et les métadonnées</li>
+<li><strong>Maintient</strong> le système de fichiers (arborescence des fichiers)</li>
+<li><strong>Régule</strong> l’accès client aux fichiers</li>
+<li><strong>N’est PAS</strong> impliqué dans le stockage ou la transmission des données</li>
+<li>Stock de métadonnées :
+<ul>
+<li><strong>FsImage</strong> : image du système de fichiers</li>
+<li><strong>EditLog</strong> : journal des modifications</li>
+</ul>
+</li>
+</ul>
+<h4 id="datanode-esclaves">DataNode (Esclaves)</h4>
+<ul>
+<li><strong>Nombreux</strong> par cluster (un par nœud machine)</li>
+<li><strong>Gère</strong> le stockage attaché à leurs nœuds</li>
+<li><strong>Exécute</strong> les opérations de lecture/écriture demandées</li>
+<li><strong>Rapporte périodiquement</strong> le statut au NameNode</li>
+<li><strong>Crée</strong>, <strong>supprime</strong> et <strong>réplique</strong> les blocs selon instructions</li>
+</ul>
+<h3 id="concept-des-blocs">Concept des Blocs</h3>
+<p>Les fichiers sont divisés en <strong>blocs</strong> :</p>
+
+<table>
+<thead>
+<tr>
+<th>Caractéristique</th>
+<th>Détail</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Taille par défaut</strong></td>
+<td>64 MB (Hadoop) / 128 MB (BigInsights)</td>
+</tr>
+<tr>
+<td><strong>Stockage</strong></td>
+<td>Répartis sur différents DataNodes</td>
+</tr>
+<tr>
+<td><strong>Redondance</strong></td>
+<td>Chaque bloc est répliqué (défaut : 3 copies)</td>
+</tr>
+<tr>
+<td><strong>Transparence</strong></td>
+<td>Cache système d’exploitation en dessous</td>
+</tr>
+</tbody>
+</table><h4 id="exemple-de-réplication">Exemple de Réplication</h4>
+<pre><code>Fichier de 210 MB → 4 blocs
+- Bloc 1 : 64 MB
+- Bloc 2 : 64 MB  
+- Bloc 3 : 64 MB
+- Bloc 4 : 18 MB
+
+Chaque bloc répliqué 3 fois sur 3 DataNodes différents
+</code></pre>
+<h3 id="stratégie-de-réplication-rack-awareness">Stratégie de Réplication (Rack Awareness)</h3>
+<p>Pour optimiser la bande passante inter-cluster :</p>
+<ol>
+<li><strong>Réplica 1</strong> : Même nœud que le writer</li>
+<li><strong>Réplica 2</strong> : Nœud différent, <strong>même rack</strong></li>
+<li><strong>Réplica 3</strong> : Nœud différent, <strong>rack différent</strong></li>
+</ol>
+<p><strong>Avantage</strong> : Réduit le trafic inter-rack</p>
+<h3 id="démarrage-du-namenode">Démarrage du NameNode</h3>
+<pre><code>1. Lecture du FsImage en mémoire
+2. Application des changements du EditLog
+3. Attente des informations de bloc des DataNodes
+4. Sortie du mode sûr quand 99.9% des blocs ont ≥1 copie
+</code></pre>
+<h3 id="secondary-namenode">Secondary NameNode</h3>
+<p>⚠️ <strong>NE PAS un NameNode de secours!</strong> C’est un processus qui aide le NameNode primaire.</p>
+<p>Rôle :</p>
+<ul>
+<li>Tous les quelques minutes, copie le nouvel EditLog du NameNode primaire</li>
+<li><strong>Fusionne</strong> EditLog dans FsImage</li>
+<li>Copie le FsImage fusionné au NameNode primaire</li>
+<li>Réduit le temps de démarrage du NameNode primaire</li>
+</ul>
+<h3 id="disponibilité-haute-hdfs-2">Disponibilité Haute (HDFS-2)</h3>
+<h4 id="namenode-ha">NameNode HA</h4>
+<ul>
+<li><strong>NameNode Actif</strong> + <strong>NameNode Standby</strong></li>
+<li>Tous les changements de système de fichiers sont enregistrés sur <strong>3+ nœuds quorum</strong></li>
+<li>NameNode Standby applique les changements du journal en temps réel</li>
+<li><strong>Split-brain</strong> évité : les nœuds quorum ne permettent qu’à UN NameNode d’écrire</li>
+<li>Basculement très rapide car NameNode Standby est déjà à jour</li>
+</ul>
+<h4 id="nœud-fédéré-hadoop2">Nœud Fédéré (Hadoop2)</h4>
+<ul>
+<li>Plusieurs NameNodes peuvent gérer des blockpools séparés</li>
+<li>Les DataNodes s’enregistrent sur TOUS les NameNodes</li>
+<li>Chaque NameNode a son propre processus de secours</li>
+<li>Élimine le goulot d’étranglement du NameNode pour énormes clusters</li>
+</ul>
+<h3 id="commandes-du-shell-du-système-de-fichiers">Commandes du Shell du Système de Fichiers</h3>
+<p>Format URI générique : <code>scheme://authority/path</code></p>
+<h4 id="exemples">Exemples</h4>
+<pre class=" language-bash"><code class="prism  language-bash"><span class="token comment"># Lister un répertoire</span>
+hadoop fs -ls <span class="token keyword">.</span>
+
+<span class="token comment"># Copier depuis local vers HDFS</span>
+hadoop fs -copyFromLocal localfile.txt hdfs://localhost:9000/user/keith/myfile.txt
+hadoop fs -put localfile.txt /user/keith/
+
+<span class="token comment"># Copier depuis HDFS vers local</span>
+hadoop fs -copyToLocal hdfs://path/file /local/path
+hadoop fs -get hdfs://path/file /local/path
+
+<span class="token comment"># Opérations POSIX-like</span>
+hadoop fs -cat, -chgrp, -chmod, -chown, -cp, -du, -mkdir, -mv, -rm, -stat, -tail
+
+<span class="token comment"># Opérations spécifiques HDFS</span>
+hadoop fs -copyFromLocal, -put, -copyToLocal, -get, -getmerge, -setrep
+</code></pre>
+<h3 id="vérification-de-la-santé-du-système">Vérification de la Santé du Système</h3>
+<pre class=" language-bash"><code class="prism  language-bash">hadoop <span class="token function">fsck</span>  <span class="token comment"># Vérifier l'intégrité du système de fichiers</span>
+</code></pre>
+<hr>
+<h2 id="a-idmapreducea5.-mapreduce---framework-de-traitement"><a id="mapreduce"></a>5. MapReduce - Framework de Traitement</h2>
+<h3 id="quest-ce-que-mapreduce">Qu’est-ce que MapReduce?</h3>
+<p>C’est un <strong>framework de programmation</strong> pour traiter les énormes volumes de données en <strong>parallèle</strong> sur un cluster de machines, en utilisant un modèle de programmation simple mais puissant.</p>
+<h3 id="principes-fondamentaux">Principes Fondamentaux</h3>
+<ol>
+<li>Les données sont stockées partout dans le cluster (HDFS)</li>
+<li>Les programmes sont apportés aux données, <strong>PAS</strong> l’inverse</li>
+<li>Les tâches s’exécutent en parallèle sur les nœuds où les données résident</li>
+</ol>
+<h3 id="architecture-maître-esclave-1">Architecture Maître-Esclave</h3>
+<pre><code>          JobTracker (Maître)
+           /    |    \
+     TaskTracker1  TaskTracker2  TaskTracker3  (Esclaves)
+</code></pre>
+<h4 id="jobtracker">JobTracker</h4>
+<ul>
+<li>Accepte les jobs MapReduce soumis par les clients</li>
+<li>Attribue les Map et Reduce tasks aux TaskTrackers</li>
+<li>Maintient le travail aussi proche des données que possible</li>
+<li>Surveille les tâches et le statut des TaskTrackers</li>
+</ul>
+<h4 id="tasktracker">TaskTracker</h4>
+<ul>
+<li>Exécute les Map et Reduce tasks</li>
+<li>Rapporte le statut au JobTracker</li>
+<li>Gère le stockage et la transmission des résultats intermédiaires</li>
+</ul>
+<h3 id="le-modèle-de-programmation-mapreduce">Le Modèle de Programmation MapReduce</h3>
+<pre><code>ENTRÉE
+  ↓
+[SPLIT] → Multiple données d'entrée
+  ↓
+[MAP] → Traitement parallèle (key-value pairs)
+  ↓
+[SHUFFLE &amp; SORT] → Regroupement par clé
+  ↓
+[REDUCE] → Agrégation/fusion
+  ↓
+SORTIE
+</code></pre>
+<h3 id="phases-détaillées">Phases Détaillées</h3>
+<h4 id="phase-map">1. Phase MAP</h4>
+<p>Chaque <strong>Mapper</strong> :</p>
+<ul>
+<li>Reçoit une portion des données d’entrée (split)</li>
+<li>Analyse, filtre ou transforme les données</li>
+<li>Produit des paires <strong>&lt;clé, valeur&gt;</strong> groupées</li>
+</ul>
+<p><strong>Exemple</strong> : Pour compter les mots</p>
+<ul>
+<li>Entrée : Lignes de texte</li>
+<li>Sortie : <code>&lt;"mot", 1&gt;</code></li>
+</ul>
+<h4 id="phase-shuffle">2. Phase SHUFFLE</h4>
+<ul>
+<li>La sortie de chaque Mapper est <strong>regroupée localement par clé</strong></li>
+<li>Un nœud est choisi pour traiter chaque clé unique</li>
+<li>Tous les <strong>&lt;clé, valeur&gt;</strong> ayant la même clé sont envoyés au même Reducer</li>
+<li>Distribution transparente orchestrée par MapReduce</li>
+</ul>
+<h4 id="phase-reduce">3. Phase REDUCE</h4>
+<p>Chaque <strong>Reducer</strong> :</p>
+<ul>
+<li>Agrège toutes les valeurs pour la clé dont il est responsable</li>
+<li>Écrit le résultat dans son propre fichier</li>
+</ul>
+<p><strong>Exemple</strong> : Continuer le comptage des mots</p>
+<ul>
+<li>Entrée : <code>&lt;"mot", [1, 1, 1]&gt;</code></li>
+<li>Sortie : <code>&lt;"mot", 3&gt;</code></li>
+</ul>
+<h4 id="phase-combiner-optionnel">4. Phase COMBINER (Optionnel)</h4>
+<p>Pour améliorer les performances :</p>
+<ul>
+<li>Agrégation <strong>locale</strong> sur chaque nœud Map (avant Shuffle)</li>
+<li>Réduit la quantité de données à transmettre sur le réseau</li>
+<li>Réduit l’effort de fusion au Reducer</li>
+</ul>
+<h3 id="exemple-wordcount-complet">Exemple WordCount Complet</h3>
+<pre><code>ENTRÉE :
+Node 1: "Tiger\nLion\nLion\nPanther"
+Node 2: "Tiger\nTiger\nWolf\nPanther"
+
+MAP PHASE :
+Node 1: &lt;Tiger,1&gt;, &lt;Lion,1&gt;, &lt;Lion,1&gt;, &lt;Panther,1&gt;
+Node 2: &lt;Tiger,1&gt;, &lt;Tiger,1&gt;, &lt;Panther,1&gt;
+
+SHUFFLE (Partitioner par hash):
+Node 1: &lt;Panther,[1,1]&gt;, &lt;Tiger,[1,1,1]&gt;
+Node 3: &lt;Lion,[1,1]&gt;
+
+REDUCE PHASE :
+Node 1: &lt;Panther,2&gt;, &lt;Tiger,3&gt;
+Node 3: &lt;Lion,2&gt;
+
+SORTIE :
+&lt;Lion, 2&gt;
+&lt;Panther, 2&gt;
+&lt;Tiger, 3&gt;
+</code></pre>
+<h3 id="concepts-de-splits-et-recordreader">Concepts de Splits et RecordReader</h3>
+<h4 id="inputsplit">InputSplit</h4>
+<ul>
+<li>HDFS divise les fichiers en <strong>fragments ou splits</strong></li>
+<li>Une Map task s’exécute sur chaque split</li>
+<li>BUT : traiter autant de données que possible <strong>localement</strong></li>
+<li>La classe <strong>InputSplitter</strong> divise un fichier HDFS en splits</li>
+</ul>
+<h4 id="recordreader">RecordReader</h4>
+<ul>
+<li>Prend un split et le lit en <strong>records</strong></li>
+<li>La plupart du temps, un split ne finit pas à la limite d’un bloc</li>
+<li><strong>LineRecordReader</strong> lit jusqu’à la fin de la ligne</li>
+<li>HDFS envoie la partie manquante de la dernière ligne sur le réseau</li>
+<li>Le RecordReader suivant ignore la première ligne incomplète</li>
+</ul>
+<h4 id="inputformat">InputFormat</h4>
+<ul>
+<li>Prend chaque record et le transforme en paire <code>&lt;clé, valeur&gt;</code></li>
+<li><strong>TextInputFormat</strong> : retourne une paire par ligne
+<ul>
+<li>Valeur = contenu de la ligne</li>
+<li>Clé = offset jusqu’au caractère de nouvelle ligne</li>
+</ul>
+</li>
+</ul>
+<h3 id="cycle-de-vie-dune-tâche-mapreduce">Cycle de Vie d’une Tâche MapReduce</h3>
+<pre><code>1. Client soumet le job
+   ↓
+2. JobTracker obtient un nouvel ID de job
+   ↓
+3. Client copie les ressources du job
+   ↓
+4. Client soumet le job
+   ↓
+5. JobTracker initialise le job
+   ↓
+6. JobTracker récupère les input splits
+   ↓
+7. TaskTracker envoie un heartbeat (retour de tâche)
+   ↓
+8. TaskTracker récupère les ressources du job
+   ↓
+9. TaskTracker lance la tâche child
+   ↓
+10. La tâche s'exécute
+</code></pre>
+<h3 id="tolérance-aux-pannes">Tolérance aux Pannes</h3>
+<h4 id="échec-de-tâche">Échec de Tâche</h4>
+<ul>
+<li>Child JVM rapporte l’échec au TaskTracker avant de quitter</li>
+<li>Tentative est marquée comme échouée → slot libéré</li>
+<li>Si la tâche plante : JobTracker la replanifie sur une autre machine</li>
+<li>Si la tâche échoue plusieurs fois : job échoue</li>
+</ul>
+<h4 id="échec-du-tasktracker">Échec du TaskTracker</h4>
+<ul>
+<li>JobTracker ne reçoit plus de heartbeat</li>
+<li>TaskTracker est retiré du pool de planification</li>
+<li>Les tâches sont replanifiées ailleurs</li>
+</ul>
+<h4 id="échec-du-jobtracker">Échec du JobTracker</h4>
+<ul>
+<li><strong>Point de défaillance unique</strong></li>
+<li>Le job échoue complètement</li>
+<li>❌ Aucun mécanisme de secours dans Hadoop 1.x</li>
+</ul>
+<h3 id="configuration-mapreduce-mapred-site.xml">Configuration MapReduce (mapred-site.xml)</h3>
+
+<table>
+<thead>
+<tr>
+<th>Paramètre</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>jobtracker.taskScheduler</code></td>
+<td>Planificateur utilisé (BigInsights : WorkflowScheduler)</td>
+</tr>
+<tr>
+<td><code>tasktracker.map.tasks.maximum</code></td>
+<td>Max Map tasks par TaskTracker</td>
+</tr>
+<tr>
+<td><code>tasktracker.reduce.tasks.maximum</code></td>
+<td>Max Reduce tasks par TaskTracker</td>
+</tr>
+<tr>
+<td><code>child.java.opts</code></td>
+<td>Mémoire max de la JVM pour chaque tâche</td>
+</tr>
+<tr>
+<td><code>map.tasks.speculative.execution</code></td>
+<td>Lancer des tâches redondantes</td>
+</tr>
+<tr>
+<td><code>io.sort.mb</code></td>
+<td>Taille du cache mémoire pour tri (Reducer)</td>
+</tr>
+<tr>
+<td><code>io.sort.factor</code></td>
+<td>Nombre de fichiers à fusionner à la fois</td>
+</tr>
+</tbody>
+</table><h3 id="planification-des-tâches">Planification des Tâches</h3>
+<h4 id="planificateur-fifo-avec-priorités">Planificateur FIFO (avec Priorités)</h4>
+<ul>
+<li>Chaque job utilise <strong>tout le cluster</strong>, les jobs attendent leur tour</li>
+<li>5 niveaux de priorité possibles</li>
+<li>Pas de préemption</li>
+<li>Simple mais pas idéal pour les environnements multi-utilisateurs</li>
+</ul>
+<h4 id="planificateur-fair">Planificateur Fair</h4>
+<ul>
+<li>Jobs assignés aux <strong>pools</strong> (1 pool par utilisateur par défaut)</li>
+<li>Chaque pool reçoit un nombre égal de slots de tâche</li>
+<li>Utilisation <strong>équitable</strong> des ressources</li>
+<li>Configuration du partage minimal possible</li>
+<li>Plusieurs utilisateurs peuvent exécuter des jobs simultanément</li>
+</ul>
+<p><strong>Exemple Fair Scheduler</strong> :</p>
+<ul>
+<li>Mary, John, Peter demandent 80, 80, 120 tâches</li>
+<li>Cluster peut allouer max 60 tâches</li>
+<li>Distribution : Mary=20, John=20, Peter=20</li>
+<li>Si Mary a partage minimal de 40 : Mary=40, John=10, Peter=10</li>
+</ul>
+<hr>
+<h2 id="a-idlangagesa6.-langages-de-requête-hadoop"><a id="langages"></a>6. Langages de Requête Hadoop</h2>
+<h3 id="différence--schéma-on-read-vs-schéma-on-write">Différence : Schéma on Read vs Schéma on Write</h3>
+
+<table>
+<thead>
+<tr>
+<th>Base de Données Relationnelle</th>
+<th>Hadoop (Big Data)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Schéma on Load</strong> : Schéma d’abord, puis chargement des données</td>
+<td><strong>Schéma on Run</strong> : Données brutes d’abord, schéma appliqué à la requête</td>
+</tr>
+<tr>
+<td>Les données sont pré-filtrées selon le schéma</td>
+<td>Les données brutes sont stockées intégralement</td>
+</tr>
+<tr>
+<td>Structure rigide</td>
+<td>Flexibilité pour gérer les données non structurées</td>
+</tr>
+</tbody>
+</table><h3 id="comparaison-rdbms-vs-hadoop">Comparaison RDBMS vs Hadoop</h3>
+
+<table>
+<thead>
+<tr>
+<th>Aspect</th>
+<th>RDBMS</th>
+<th>Hadoop</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Sources de données</strong></td>
+<td>Données structurées avec schémas connus</td>
+<td>Structurées et non structurées</td>
+</tr>
+<tr>
+<td><strong>Types de données</strong></td>
+<td>Records, longs champs, objets, XML</td>
+<td>Fichiers</td>
+</tr>
+<tr>
+<td><strong>Mises à jour</strong></td>
+<td>Autorisées</td>
+<td>Inserts et deletes uniquement</td>
+</tr>
+<tr>
+<td><strong>Langage</strong></td>
+<td>SQL, XQuery</td>
+<td>Pig, Hive, Jaql, BigSQL</td>
+</tr>
+<tr>
+<td><strong>Type de traitement</strong></td>
+<td>Réponse rapide, accès aléatoire</td>
+<td>Batch processing</td>
+</tr>
+<tr>
+<td><strong>Sécurité</strong></td>
+<td>Oui</td>
+<td>Partielle</td>
+</tr>
+<tr>
+<td><strong>Compression</strong></td>
+<td>Sophistiquée</td>
+<td>Simple (fichiers)</td>
+</tr>
+<tr>
+<td><strong>Matériel</strong></td>
+<td>Entreprise (cher)</td>
+<td>Commodity (peu cher)</td>
+</tr>
+<tr>
+<td><strong>Accès aux données</strong></td>
+<td>Aléatoire (indexage)</td>
+<td>Fichiers uniquement (streaming)</td>
+</tr>
+<tr>
+<td><strong>Historique</strong></td>
+<td>~40 ans d’innovation</td>
+<td>&lt; 5 ans</td>
+</tr>
+</tbody>
+</table><h3 id="pig">Pig</h3>
+<p><strong>Langage de flux de données (Data Flow Language) développé par Yahoo!</strong></p>
+<h4 id="caractéristiques">Caractéristiques</h4>
+<ul>
+<li>Langage : <strong>Pig Latin</strong></li>
+<li>Programme taille réduite vs Java</li>
+<li><strong>Traduit automatiquement</strong> en jobs Map/Reduce</li>
+<li>2 modes d’exécution :
+<ul>
+<li><strong>Local</strong> : pour test/prototype</li>
+<li><strong>Distributed (MapReduce)</strong> : sur cluster Hadoop</li>
+</ul>
+</li>
+</ul>
+<h4 id="trois-étapes-dun-programme-pig">Trois Étapes d’un Programme Pig</h4>
+<ol>
+<li><strong>LOAD</strong> : Charger les données du HDFS</li>
+<li><strong>TRANSFORM</strong> : Traduites en tâches Map/Reduce
+<ul>
+<li>Opérateurs : FILTER, FOREACH, GROUP, UNION, etc.</li>
+</ul>
+</li>
+<li><strong>DUMP ou STORE</strong> : Afficher ou stocker le résultat</li>
+</ol>
+<h4 id="types-de-données-pig">Types de Données Pig</h4>
+<ul>
+<li><strong>Simples</strong> : int, long, float, double, chararray, bytearray, boolean</li>
+<li><strong>Complexes</strong> :
+<ul>
+<li><strong>Tuple</strong> : ensemble ordonné de champs <code>(John, 18)</code></li>
+<li><strong>Bag</strong> : collection de tuples <code>{(John,18), (Mary,29)}</code></li>
+<li><strong>Map</strong> : paires clé/valeur <code>[name#John, phone#1234567]</code></li>
+</ul>
+</li>
+</ul>
+<h4 id="exemple-wordcount-en-pig">Exemple WordCount en Pig</h4>
+<pre class=" language-pig"><code class="prism  language-pig">myinput = LOAD './all_web_pages' AS (line:chararray);
+
+words = FOREACH myinput GENERATE FLATTEN(TOKENIZE(line)) AS word;
+
+word_groups = GROUP words BY word;
+
+word_count = FOREACH word_groups GENERATE COUNT(words) AS count, group;
+
+ordered_word_count = ORDER word_count BY count DESC;
+
+STORE ordered_word_count INTO './word_count_result';
+</code></pre>
+<h3 id="hive">Hive</h3>
+<p><strong>Infrastructure d’entrepôt de données construite sur Hadoop (développée par Facebook)</strong></p>
+<h4 id="quest-ce-que-hive">Qu’est-ce que Hive?</h4>
+<ul>
+<li>Langage de requête : <strong>HiveQL</strong> (ressemble à SQL)</li>
+<li>Permet aux développeurs SQL d’utiliser leurs compétences existantes</li>
+<li>Fournit des UDF (fonctions définies par l’utilisateur) intégrées</li>
+<li>Indexage disponible</li>
+</ul>
+<h4 id="ce-que-hive-ne-pas-est">Ce que Hive NE PAS est</h4>
+<ul>
+<li>❌ Pas conçu pour requêtes à faible latence (contrairement à RDBMS)</li>
+<li>❌ Pas “schéma on write”</li>
+<li>❌ Pas pour OLTP (traitement transactionnel en ligne)</li>
+<li>❌ Pas SQL-compliant, seulement commandes limitées</li>
+</ul>
+<h4 id="composants-hive">Composants Hive</h4>
+<ul>
+<li><strong>Shell</strong> : Interface de ligne de commande</li>
+<li><strong>Driver</strong> : Dirigeant l’exécution</li>
+<li><strong>Compiler</strong> : Compilation HiveQL</li>
+<li><strong>Engine</strong> : Moteur d’exécution</li>
+<li><strong>Metastore</strong> : Stockage des définitions de table et de la disposition physique</li>
+</ul>
+<h4 id="modèles-de-données-hive">Modèles de Données Hive</h4>
+<ol>
+<li><strong>Tables</strong> : Analogues aux tables RDBMS, composées de colonnes</li>
+<li><strong>Partitions</strong> : Pour optimiser l’accès aux données (ex. partitionner par date)</li>
+<li><strong>Buckets</strong> : Données divisées dans chaque partition selon hash d’une colonne</li>
+</ol>
+<h4 id="exemple-hive---analyse-des-notes-de-films">Exemple Hive - Analyse des Notes de Films</h4>
+<pre class=" language-sql"><code class="prism  language-sql"><span class="token comment">-- Créer une table avec format texte séparé par des tabulations</span>
+<span class="token keyword">CREATE</span> <span class="token keyword">TABLE</span> movie_ratings <span class="token punctuation">(</span>
+    userid <span class="token keyword">INT</span><span class="token punctuation">,</span>
+    movieid <span class="token keyword">INT</span><span class="token punctuation">,</span>
+    rating <span class="token keyword">INT</span><span class="token punctuation">)</span>
+<span class="token keyword">ROW</span> FORMAT DELIMITED
+<span class="token keyword">FIELDS</span> <span class="token keyword">TERMINATED BY</span> <span class="token string">'\t'</span>
+STORED <span class="token keyword">AS</span> TEXTFILE<span class="token punctuation">;</span>
+
+<span class="token comment">-- Charger les données</span>
+<span class="token keyword">LOAD</span> <span class="token keyword">DATA</span> INPATH <span class="token string">'hdfs://node/movie_data'</span> OVERWRITE <span class="token keyword">INTO</span> <span class="token keyword">TABLE</span> movie_ratings<span class="token punctuation">;</span>
+
+<span class="token comment">-- Récupérer les notes par film</span>
+<span class="token keyword">SELECT</span> movieid<span class="token punctuation">,</span> rating<span class="token punctuation">,</span> <span class="token function">COUNT</span><span class="token punctuation">(</span>rating<span class="token punctuation">)</span>
+<span class="token keyword">FROM</span> movie_ratings
+<span class="token keyword">GROUP</span> <span class="token keyword">BY</span> movieid<span class="token punctuation">,</span> rating<span class="token punctuation">;</span>
+</code></pre>
+<h3 id="jaql">Jaql</h3>
+<p><strong>Langage développé par IBM pour la manipulation facile de données semi-structurées</strong></p>
+<h4 id="caractéristiques-1">Caractéristiques</h4>
+<ul>
+<li>Langage : <strong>Jaql</strong></li>
+<li>Flexibilité avec schéma optionnel</li>
+<li>Formats supportés : JSON, XML, CSV, fichiers plats</li>
+<li>Facilité d’extensibilité</li>
+</ul>
+<h4 id="comment-fonctionnent-les-requêtes-jaql">Comment Fonctionnent les Requêtes Jaql?</h4>
+<p>Une requête Jaql peut être pensée comme un <strong>pipeline</strong> :</p>
+<pre><code>Source → Opérateur1 → Opérateur2 → ... → Opérateur n → Sink
+</code></pre>
+<h4 id="opérateurs-jaql">Opérateurs Jaql</h4>
+<ul>
+<li><strong>FILTER</strong> : Filtrer les données</li>
+<li><strong>TRANSFORM</strong> : Transformer les données</li>
+<li><strong>GROUP</strong> : Grouper</li>
+<li><strong>JOIN</strong> : Joindre</li>
+<li><strong>EXPAND</strong> : Développer</li>
+<li><strong>SORT</strong> : Trier</li>
+<li><strong>TOP</strong> : Top n éléments</li>
+</ul>
+<h4 id="fonctions-intégrées">Fonctions Intégrées</h4>
+<ul>
+<li>Nombreuses fonctions prédéfinies</li>
+<li>Types de données : booléen, chaîne, long, etc.</li>
+<li>Types complexes : array, record</li>
+</ul>
+<h4 id="où-exécuter-jaql">Où Exécuter Jaql?</h4>
+<ul>
+<li><strong>Shell</strong> : <code>jaqlshell</code> (mode cluster ou local)</li>
+<li><strong>Eclipse</strong> : Intégration IDE</li>
+<li><strong>Embarqué en Java</strong> : Dans du code Java</li>
+</ul>
+<h4 id="exemple-jaql---filtrer-employés">Exemple Jaql - Filtrer Employés</h4>
+<pre class=" language-jaql"><code class="prism  language-jaql">read(hdfs("employees")) 
+-&gt; filter $.mgr or $.income &gt; 50000 
+-&gt; transform { $.name, $.income } 
+-&gt; write(hdfs("output"));
+</code></pre>
+<p>Explication étape par étape :</p>
+<ol>
+<li>Charger les employés</li>
+<li>Filtrer : manager OU revenu &gt; 50000</li>
+<li>Transformer : garder seulement nom et revenu</li>
+<li>Écrire dans la sortie HDFS</li>
+</ol>
+<h3 id="bigsql">BigSQL</h3>
+<p><strong>Accès SQL natif aux données Hadoop (développé par IBM)</strong></p>
+<h4 id="caractéristiques-2">Caractéristiques</h4>
+<ul>
+<li><strong>SQL standard ANSI-92+</strong></li>
+<li><strong>Syntaxe SQL standard</strong> (joins, types de données, etc.)</li>
+<li>Vrais drivers <strong>JDBC/ODBC</strong></li>
+<li>Optimisation
+<ul>
+<li>Utiliser parallélisme MapReduce OU</li>
+<li>Accès direct pour requêtes à basse latence</li>
+</ul>
+</li>
+<li>Multipled sources de données</li>
+</ul>
+<h4 id="sources-de-données-bigsql">Sources de Données BigSQL</h4>
+<ul>
+<li>Tables HBase (incluant indexes secondaires)</li>
+<li>Fichiers CSV/délimités</li>
+<li>Fichiers Sequence</li>
+<li>JSON</li>
+<li>Tables Hive</li>
+</ul>
+<hr>
+<h2 id="a-idhbasea7.-hbase---base-de-données-nosql"><a id="hbase"></a>7. HBase - Base de Données NoSQL</h2>
+<h3 id="quest-ce-que-hbase">Qu’est-ce que HBase?</h3>
+<p><strong>HBase</strong> est une <strong>implémentation open-source</strong> du design <strong>BigTable de Google</strong>.</p>
+<h4 id="définition-formelle-google-bigtable">Définition Formelle (Google BigTable)</h4>
+<p><em>“Une BigTable est une <strong>carte multidimensionnelle triée, clairsemée et persistante</strong>”</em></p>
+<h4 id="caractéristiques-3">Caractéristiques</h4>
+<ul>
+<li>Projet Apache Top Level</li>
+<li>Base de données NoSQL</li>
+<li>Puissance Facebook, Yahoo, etc.</li>
+<li>Partie intégrante de l’écosystème Hadoop</li>
+</ul>
+<h3 id="pourquoi-nosql">Pourquoi NoSQL?</h3>
+<p><strong>NoSQL = “Not Only SQL”</strong> - nouvelle classe de technologies pour l’ère du Big Data</p>
+<h4 id="pourquoi-hbase">Pourquoi HBase?</h4>
+<ol>
+<li>
+<p><strong>Hautement Scalable</strong></p>
+<ul>
+<li>Partitionnement automatique (sharding)</li>
+<li>Mise à l’échelle linéaire avec nouveaux nœuds</li>
+</ul>
+</li>
+<li>
+<p><strong>Faible Latence</strong></p>
+<ul>
+<li>Support des lectures/écritures aléatoires</li>
+<li>Scans de petite portée efficaces</li>
+</ul>
+</li>
+<li>
+<p><strong>Hautement Disponible</strong></p>
+<ul>
+<li>Replication en place</li>
+</ul>
+</li>
+<li>
+<p><strong>Cohérence Forte</strong></p>
+<ul>
+<li>Les données écrites sont immédiatement visibles</li>
+</ul>
+</li>
+<li>
+<p><strong>Excellent pour Données Clairsemées</strong></p>
+<ul>
+<li>Pas de colonnes fixes</li>
+<li>Pas de valeurs NULL</li>
+</ul>
+</li>
+</ol>
+<h4 id="quand-utiliser-hbase-vs-rdbms">Quand Utiliser HBase vs RDBMS</h4>
+
+<table>
+<thead>
+<tr>
+<th>Critère</th>
+<th>HBase</th>
+<th>RDBMS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Volumes de données</strong></td>
+<td>Centaines de millions/milliards de lignes</td>
+<td>Quelques milliers/millions</td>
+</tr>
+<tr>
+<td><strong>Besoin de features RDBMS</strong></td>
+<td>Non (indexes secondaires, transactions, etc.)</td>
+<td>Oui</td>
+</tr>
+<tr>
+<td><strong>Nombre de nœuds</strong></td>
+<td>5+ DataNodes minimum</td>
+<td>1 serveur suffit</td>
+</tr>
+<tr>
+<td><strong>Requêtes complexes</strong></td>
+<td>❌ Limitées</td>
+<td>✅ SQL avancé</td>
+</tr>
+</tbody>
+</table><h3 id="propriétés-acid-dans-hbase">Propriétés ACID dans HBase</h3>
+<h4 id="atomicité">Atomicité</h4>
+<ul>
+<li>Toute lecture/écriture dans une région est effectuée par le <strong>Region Server assigné</strong></li>
+<li>Tous les clients doivent parler au <strong>Region Server assigné</strong></li>
+<li>Fournit l’<strong>atomicité au niveau de la ligne</strong></li>
+</ul>
+<h4 id="cohérence-et-isolation">Cohérence et Isolation</h4>
+<ul>
+<li>Toutes les lignes retournées par une API d’accès seront une <strong>ligne complète</strong> qui a existé à un moment de l’historique de la table</li>
+<li>Snapshot isolation : les scans NE SONT PAS des vues cohérentes</li>
+<li>Chaque ligne retournée sera une vue cohérente</li>
+</ul>
+<h4 id="durabilité">Durabilité</h4>
+<ul>
+<li>Toutes les données visibles sont également durables sur disque</li>
+<li>Une lecture ne retournera jamais de données qui n’ont pas été rendues durables</li>
+</ul>
+<h4 id="contrôle-de-concurrence">Contrôle de Concurrence</h4>
+<ul>
+<li>HBase acquiert automatiquement un verrou avant une écriture</li>
+<li>L’utilisateur peut aussi contrôler manuellement le verrouillage</li>
+</ul>
+<h3 id="modèle-de-données-hbase">Modèle de Données HBase</h3>
+<p><strong>Représentation</strong> : <code>(row key, column key, timestamp) → value</code></p>
+<h4 id="concepts-clés">Concepts Clés</h4>
+<ol>
+<li>
+<p><strong>Table</strong></p>
+<ul>
+<li>Contient des column families</li>
+<li>Données organisées par row key</li>
+</ul>
+</li>
+<li>
+<p><strong>Column Family</strong></p>
+<ul>
+<li><strong>Groupage logique et physique</strong> de colonnes</li>
+<li>Les colonnes d’une même famille doivent avoir des caractéristiques similaires</li>
+<li>Configurable par column family :
+<ul>
+<li>Versioning multidimensionnel (timestamp)</li>
+<li>Compression (none, Gzip, LZO, SNAPPY)</li>
+<li>Politique de conservation des versions (TTL)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Column (Column Qualifier)</strong></p>
+<ul>
+<li>N’existe que si inséré</li>
+<li><strong>Peut avoir plusieurs versions</strong> (timestamps)</li>
+<li>Chaque ligne peut avoir un <strong>ensemble différent</strong> de colonnes</li>
+<li>Format : <code>family:qualifier</code></li>
+</ul>
+</li>
+<li>
+<p><strong>Row Key</strong></p>
+<ul>
+<li>Clé primaire implicite</li>
+<li>Tableaux de bytes, <strong>triés lexicographiquement</strong></li>
+<li>Requêtes rapides utilisant row key</li>
+<li>Scans efficaces des lignes adjacentes</li>
+</ul>
+</li>
+<li>
+<p><strong>Timestamp/Version</strong></p>
+<ul>
+<li>Chaque cellule a une version</li>
+<li>Peut être un timestamp ou un entier</li>
+<li>La mise à jour d’une colonne ajoute juste une nouvelle version</li>
+</ul>
+</li>
+</ol>
+<h4 id="vue-logique-vs-vue-physique">Vue Logique vs Vue Physique</h4>
+<p><strong>Vue Logique</strong> (par lignes) :</p>
+<pre><code>Row 11111:
+  cf_data: {cq_name: 'name1', cq_val: 1111}
+  cf_info: {cq_desc: 'desc11111'}
+
+Row 22222:
+  cf_data: {cq_name: 'name2', cq_val: [2013@ts=2013, 2012@ts=2012]}
+</code></pre>
+<p><strong>Vue Physique</strong> (par cellules) :</p>
+<pre><code>11111 cf_data cq_name name1 @ts1
+11111 cf_data cq_val  1111  @ts1
+22222 cf_data cq_name name2 @ts1
+22222 cf_data cq_val  2013  @ts1
+22222 cf_data cq_val  2012  @ts2
+</code></pre>
+<h3 id="hbase-vs-rdbms">HBase vs RDBMS</h3>
+
+<table>
+<thead>
+<tr>
+<th>Aspect</th>
+<th>HBase</th>
+<th>RDBMS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Layout</strong></td>
+<td>Multidimensional map</td>
+<td>Row or Column Oriented</td>
+</tr>
+<tr>
+<td><strong>Transactions</strong></td>
+<td>ACID par ligne</td>
+<td>Oui</td>
+</tr>
+<tr>
+<td><strong>Langage de Requête</strong></td>
+<td>get/put/scan seulement</td>
+<td>SQL</td>
+</tr>
+<tr>
+<td><strong>Sécurité</strong></td>
+<td>Auth/Authz</td>
+<td>Auth/Authz</td>
+</tr>
+<tr>
+<td><strong>Indexes</strong></td>
+<td>Row-key only</td>
+<td>Oui</td>
+</tr>
+<tr>
+<td><strong>Débit</strong></td>
+<td>Millions de requêtes/sec</td>
+<td>Milliers de requêtes/sec</td>
+</tr>
+<tr>
+<td><strong>Taille Max</strong></td>
+<td>Petabytes</td>
+<td>Terabytes</td>
+</tr>
+</tbody>
+</table><h3 id="architecture-hbase">Architecture HBase</h3>
+<pre><code>                HBase Master
+                     |
+    ZooKeeper ←−−−−−−┤
+         |           |
+    [Peers]    RegionServers
+         |           |
+    [Ensemble]  [Regions + HFiles]
+</code></pre>
+<h4 id="composants">Composants</h4>
+<h5 id="region">Region</h5>
+<ul>
+<li><strong>Sous-ensemble</strong> des lignes d’une table</li>
+<li>Intervalle de row keys</li>
+<li><strong>Automatiquement divisée</strong> quand elle atteint une taille configurée</li>
+<li><strong>Unité de base</strong> de disponibilité et distribution</li>
+</ul>
+<h5 id="region-server">Region Server</h5>
+<ul>
+<li>Rend des régions disponibles</li>
+<li>Effectue les lectures/écritures</li>
+<li>Rapporte le statut au Master</li>
+<li>Les clients parlent <strong>directement</strong> aux Region Servers</li>
+</ul>
+<h5 id="master">Master</h5>
+<ul>
+<li>Coordonne les Region Servers</li>
+<li>Détecte les défaillances</li>
+<li>Effectue l’équilibrage de charge</li>
+<li><strong>Pas</strong> impliqué dans le chemin de lecture/écriture</li>
+<li>Services de fond :
+<ul>
+<li><strong>LoadBalancer</strong> : déplace les régions pour équilibrer</li>
+<li><strong>CatalogJanitor</strong> : nettoie la table .META.</li>
+<li><strong>LogCleaner</strong> : efface les vieux HLogs</li>
+</ul>
+</li>
+</ul>
+<h5 id="backup-masters">Backup Masters</h5>
+<ul>
+<li>Peuvent être configurés lors de l’installation</li>
+<li>Rivalité pour devenir le maître primaire</li>
+<li>Les Backup Masters attendent la mort du maître pour rivaliser</li>
+</ul>
+<h5 id="zookeeper">ZooKeeper</h5>
+<ul>
+<li>Service de coordination</li>
+<li>Les clients trouvent les Region Servers via ZooKeeper</li>
+<li>Les Region Servers envoient des battements de cœur</li>
+<li>Le Master surveille ZooKeeper pour les défaillances</li>
+<li><strong>Composant critique</strong> pour la tolérance aux pannes</li>
+</ul>
+<h3 id="composants-du-region-server">Composants du Region Server</h3>
+<pre><code>┌─────────────────────────────┐
+│    Region Server            │
+├─────────────────────────────┤
+│ WAL (Write-Ahead Log)       │
+│ Region 1                    │
+│ ├─ Store                    │
+│ │  ├─ MemStore             │
+│ │  └─ HFiles               │
+│ Region 2                    │
+│ └─ Store                    │
+│    ├─ MemStore             │
+│    └─ HFiles               │
+└─────────────────────────────┘
+</code></pre>
+<h4 id="write-ahead-log-wal">Write-Ahead Log (WAL)</h4>
+<ul>
+<li>Stocke tous les edits en premier</li>
+<li><strong>Un WAL par Region Server</strong> (non par région)</li>
+<li>Tous les edits pour toutes les régions d’un Region Server vont d’abord ici</li>
+<li>Permet restart des tâches</li>
+</ul>
+<h4 id="store">Store</h4>
+<ul>
+<li>Contient une column family dans une région</li>
+<li>Propriétaire d’un MemStore et d’un ensemble de HFiles</li>
+</ul>
+<h4 id="memstore">MemStore</h4>
+<ul>
+<li><strong>Écritures en mémoire</strong> avant persistance</li>
+<li>Améliore les performances</li>
+<li>Flux d’écriture :
+<ol>
+<li>Écriture en WAL</li>
+<li>Écriture en MemStore</li>
+<li>Reconnaissance client</li>
+<li>Flush périodique au HFile sur HDFS</li>
+</ol>
+</li>
+</ul>
+<h3 id="auto-sharding-et-scalabilité">Auto-Sharding et Scalabilité</h3>
+<p><strong>Sharding Automatique dans HBase</strong></p>
+<ol>
+<li>Initialement : <strong>1 Région par Table</strong></li>
+<li>Quand dépassement de seuil configurable → <strong>Automatiquement divisée en deux</strong></li>
+<li>À mesure que les données croissent :
+<ul>
+<li>Tables composées de <strong>multiples Régions</strong></li>
+<li>Servies par <strong>plusieurs Region Servers</strong></li>
+</ul>
+</li>
+<li>Lors de croissance :
+<ul>
+<li>L’admin peut ajouter des Region Servers</li>
+<li>Le Master assigne automatiquement les Régions</li>
+</ul>
+</li>
+</ol>
+<p><strong>Avantages</strong> :</p>
+<ul>
+<li>Scalabilité linéaire</li>
+<li>Équilibrage de charge automatique</li>
+<li>Plus besoin de sharding manuel</li>
+</ul>
+<h3 id="indexes-dans-hbase">Indexes dans HBase</h3>
+<h4 id="row-key---index-principal">Row Key - Index Principal</h4>
+<ul>
+<li>Toutes les requêtes utilisent la row key</li>
+<li>Rows stockées en <strong>ordre lexicographique</strong></li>
+<li>Scans de clé partielle rapides</li>
+<li>Scans de lignes adjacentes efficaces</li>
+</ul>
+<h4 id="bloom-filters">Bloom Filters</h4>
+<ul>
+<li>Permettent de décider rapidement si un row/column existe</li>
+<li>Réduisent les IO et le temps d’accès</li>
+</ul>
+<h4 id="indexes-secondaires">Indexes Secondaires</h4>
+<ul>
+<li><strong>Non supportés nativement</strong></li>
+<li>Utiliser les <strong>co-processors</strong> pour les implémenter</li>
+<li><strong>BigSQL</strong> fournit des indexes secondaires!</li>
+</ul>
+<h3 id="quand-ne-pas-utiliser-hbase">Quand NE PAS Utiliser HBase?</h3>
+<ol>
+<li>
+<p><strong>Avez-vous assez de données?</strong></p>
+<ul>
+<li>HBase OK : Centaines de millions/milliards de lignes</li>
+<li>RDBMS OK : Milliers/millions de lignes</li>
+<li>HBase n’a pas de sens pour petit dataset</li>
+</ul>
+</li>
+<li>
+<p><strong>Avez-vous besoin des features RDBMS?</strong></p>
+<ul>
+<li>Colonnes typées, indexes secondaires, transactions, SQL avancé, etc.</li>
+<li>Les applications basées RDBMS ne peuvent pas être “portées” vers HBase juste en changeant le driver</li>
+</ul>
+</li>
+<li>
+<p><strong>Avez-vous assez de matériel?</strong></p>
+<ul>
+<li>HBase ne fonctionne bien que avec <strong>5+ DataNodes minimum</strong></li>
+<li>HDFS replication défaut = 3</li>
+<li>Plus un NameNode requis</li>
+<li>Sinon utiliser RDBMS traditionnel</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2 id="a-idexamena8.-points-clés-pour-lexamen"><a id="examen"></a>8. Points Clés pour l’Examen</h2>
+<h3 id="concepts-fondamentaux">Concepts Fondamentaux</h3>
+<h4 id="les-4v-du-big-data-⭐⭐⭐">Les 4V du Big Data ⭐⭐⭐</h4>
+<ul>
+<li><strong>Volume</strong> : Croissance exponentielle des données</li>
+<li><strong>Vélocité</strong> : Arrivée rapide en temps quasi-réel</li>
+<li><strong>Variété</strong> : Mixte structuré/non-structuré (80% non structuré)</li>
+<li><strong>Véracité</strong> : Qualité et fiabilité des données</li>
+</ul>
+<h4 id="principes-hadoop-⭐⭐⭐">Principes Hadoop ⭐⭐⭐</h4>
+<ul>
+<li><strong>Apporter le traitement aux données</strong>, pas l’inverse</li>
+<li><strong>Localité des données</strong> : Traiter où les données résident</li>
+<li><strong>Tolérance aux pannes</strong> par réplication</li>
+<li><strong>Scalabilité horizontale</strong> : ajouter des nœuds facile</li>
+</ul>
+<h3 id="hdfs">HDFS</h3>
+<h4 id="concepts-critiques">Concepts Critiques</h4>
+<ol>
+<li><strong>NameNode</strong> : Gère métadonnées, pas les données</li>
+<li><strong>DataNode</strong> : Stocke et sert les données</li>
+<li><strong>Blocs</strong> : Défaut 128 MB, réplicadas 3x</li>
+<li><strong>Replication</strong> : 1 local + 1 même rack + 1 rack différent</li>
+<li><strong>RecordReader</strong> : Gère les splits qui ne finissent pas à la limite du bloc</li>
+</ol>
+<h4 id="questions-probables">Questions Probables</h4>
+<ul>
+<li>Différence NameNode vs DataNode?</li>
+<li>Comment fonctionne la réplication?</li>
+<li>Qu’est-ce qu’un Secondary NameNode?</li>
+<li>Commandes shell FS simples</li>
+</ul>
+<h3 id="mapreduce">MapReduce</h3>
+<h4 id="modèle-dexécution-⭐⭐⭐">Modèle d’Exécution ⭐⭐⭐</h4>
+<pre><code>INPUT → MAP → SHUFFLE → REDUCE → OUTPUT
+</code></pre>
+<h4 id="composants-1">Composants</h4>
+<ul>
+<li><strong>JobTracker</strong> : Maître, coordonne jobs</li>
+<li><strong>TaskTracker</strong> : Esclaves, exécutent tâches</li>
+<li><strong>Mappers</strong> : Parallèles, traitement local</li>
+<li><strong>Reducers</strong> : Agrégation des résultats</li>
+</ul>
+<h4 id="questions-probables-1">Questions Probables</h4>
+<ul>
+<li>Phases d’exécution d’un job MapReduce?</li>
+<li>Rôle du Combiner?</li>
+<li>Qu’est-ce qu’un InputSplit?</li>
+<li>Tolérance aux pannes (3 types)?</li>
+<li>Configuration de planification (FIFO vs Fair)?</li>
+</ul>
+<h3 id="langages-de-requête">Langages de Requête</h3>
+<h4 id="comparaison-⭐⭐">Comparaison ⭐⭐</h4>
+
+<table>
+<thead>
+<tr>
+<th>Aspect</th>
+<th>Pig</th>
+<th>Hive</th>
+<th>Jaql</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Type</td>
+<td>Flux de données</td>
+<td>SQL</td>
+<td>Flux de données</td>
+</tr>
+<tr>
+<td>Données</td>
+<td>Complexes</td>
+<td>Structurées</td>
+<td>Semi-structurées</td>
+</tr>
+<tr>
+<td>Schéma</td>
+<td>Optionnel</td>
+<td>Obligatoire</td>
+<td>Optionnel</td>
+</tr>
+<tr>
+<td>Développeur par</td>
+<td>Yahoo</td>
+<td>Facebook</td>
+<td>IBM</td>
+</tr>
+</tbody>
+</table><h4 id="hive-1">Hive</h4>
+<ul>
+<li>SQL sur Hadoop</li>
+<li>Batch processing, pas OLTP</li>
+<li>HiveQL, presque SQL standard</li>
+<li>Metastore, partitions, buckets</li>
+</ul>
+<h3 id="hbase">HBase</h3>
+<h4 id="concepts-de-base-⭐⭐⭐">Concepts de Base ⭐⭐⭐</h4>
+<ol>
+<li><strong>Clairsemé</strong> : Colonnes n’existent que si insérées</li>
+<li><strong>Distribué</strong> : Auto-sharding par row key range</li>
+<li><strong>Multidimensionnel</strong> : row × column × timestamp</li>
+<li><strong>NoSQL</strong> : Pas de schéma fixe</li>
+</ol>
+<h4 id="architecture">Architecture</h4>
+<ul>
+<li><strong>Master</strong> : Coordination</li>
+<li><strong>Region Servers</strong> : Données + traitement</li>
+<li><strong>ZooKeeper</strong> : Coordination haute dispo</li>
+<li><strong>Régions</strong> : Shards automatiques</li>
+</ul>
+<h4 id="quand-utiliser">Quand Utiliser?</h4>
+<ul>
+<li>✅ Milliards de lignes</li>
+<li>✅ Données clairsemées</li>
+<li>✅ Accès aléatoire rapide</li>
+<li>✅ Haute disponibilité</li>
+<li>❌ Pas queries complexes SQL</li>
+<li>❌ Petit dataset</li>
+</ul>
+<h3 id="points-dexamen-critiques">Points d’Examen Critiques</h3>
+<p><strong>Très Important (Probable à 100%)</strong></p>
+<ol>
+<li>Les 4V du Big Data</li>
+<li>Architecture HDFS (NameNode/DataNode)</li>
+<li>MapReduce phases (Map/Shuffle/Reduce)</li>
+<li>Blocs HDFS et réplication</li>
+<li>Quand utiliser Hadoop vs RDBMS</li>
+</ol>
+<p><strong>Important (Probable à 70%)</strong></p>
+<ol>
+<li>Commandes HDFS shell</li>
+<li>Secondary NameNode</li>
+<li>Combiner</li>
+<li>JobTracker/TaskTracker</li>
+<li>Différences Pig/Hive/Jaql</li>
+<li>Concepts HBase de base</li>
+</ol>
+<p><strong>Important (Probable à 50%)</strong></p>
+<ol>
+<li>Configuration MapReduce</li>
+<li>RecordReader et InputSplit</li>
+<li>Détails architecture HBase</li>
+<li>ACID dans HBase</li>
+<li>Tolérance aux pannes détails</li>
+</ol>
+<h3 id="format-de-questions-probable">Format de Questions Probable</h3>
+<ol>
+<li>
+<p><strong>Questions de Définition</strong></p>
+<ul>
+<li>“Qu’est-ce que HDFS?”</li>
+<li>“Expliquez les 4V”</li>
+</ul>
+</li>
+<li>
+<p><strong>Questions Conceptuelles</strong></p>
+<ul>
+<li>“Comparez RDBMS vs Hadoop”</li>
+<li>“Quand utiliser HBase?”</li>
+<li>“Phases d’exécution MapReduce?”</li>
+</ul>
+</li>
+<li>
+<p><strong>Questions de Cas d’Usage</strong></p>
+<ul>
+<li>“Quel outil (Pig/Hive/Jaql) pour ces données?”</li>
+<li>“Architecture pour ce scénario?”</li>
+</ul>
+</li>
+<li>
+<p><strong>Questions Techniques</strong></p>
+<ul>
+<li>“Combien de replicas par défaut?”</li>
+<li>“Rôle du Secondary NameNode?”</li>
+<li>“Opérateurs Jaql?”</li>
+</ul>
+</li>
+</ol>
+<h3 id="conseils-pour-lexamen">Conseils pour l’Examen</h3>
+<ul>
+<li>✅ Comprendre les <strong>principes</strong> pas juste la mémorisation</li>
+<li>✅ <strong>Comparer les technologies</strong> (vs RDBMS, vs chaque autre)</li>
+<li>✅ <strong>Pratiquer les exemples</strong> donnés (WordCount, etc.)</li>
+<li>✅ Apprendre le <strong>vocabulaire</strong> (NameNode, TaskTracker, Region, etc.)</li>
+<li>✅ <strong>Schémas d’architecture</strong> (comprendre le flux de données)</li>
+<li>✅ <strong>Cas d’usage</strong> (quand utiliser quoi?)</li>
+<li>✅ <strong>Configuration</strong> (comprendre les impacts)</li>
+</ul>
+<hr>
+<h2 id="résumé-exécutif">Résumé Exécutif</h2>
+<p>Le Big Data est le phénomène de gestion et traitement d’énormes volumes (4V) de données. <strong>Hadoop</strong> est le framework open-source principal qui utilise <strong>HDFS</strong> pour le stockage distribué et <strong>MapReduce</strong> pour le traitement parallèle. <strong>HDFS</strong> divise les données en blocs répliqués sur plusieurs nœuds. <strong>MapReduce</strong> traite les données en phases : Map (parallèle), Shuffle (regroupement), Reduce (agrégation). Des langages comme <strong>Hive</strong> (SQL), <strong>Pig</strong> (flux), et <strong>Jaql</strong> (semi-structuré) facilitent l’utilisation. <strong>HBase</strong> offre une alternative NoSQL avec sharding automatique et accès rapide aux données clairsemées. <strong>BigInsights</strong> d’IBM enrichit Hadoop avec outils d’administration, visualisation et analytics avancées.</p>
+<p>Bonne chance à votre examen! 🎓t](<a href="https://stackedit.io/">https://stackedit.io/</a>).</p>
+</div>
+</body>
+
+</html>
